@@ -19,3 +19,6 @@ A **serverless file uploader** built with:
 - **GitHub Actions** for CI/CD
 
 ## 📂 Project Structure
+
+
+![Build & Test](https://github.com/hpkhariprasad/serverless-file-uploader/.github/workflows/ci-cd.yml/badge.svg)

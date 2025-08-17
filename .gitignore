@@ -362,17 +362,21 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# Local .terraform directories
+# Terraform
 **/.terraform/*
-
-# Terraform state files
 *.tfstate
 *.tfstate.*
 *.backup
-
-# Crash logs
-crash.log
-
-# Terraform lock file
 .terraform.lock.hcl
 
+# Terraform crash logs
+crash.log
+
+# Build artifacts
+bin/
+obj/
+*.user
+*.vs/
+
+# Package zip
+*.zip

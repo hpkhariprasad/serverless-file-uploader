@@ -1,3 +1,8 @@
+![Build & Test](https://github.com/hpkhariprasad/serverless-file-uploader/actions/workflows/ci-cd.yml/badge.svg?branch=main&event=push&job=build-test)
+![Terraform Validate](https://github.com/hpkhariprasad/serverless-file-uploader/actions/workflows/ci-cd.yml/badge.svg?branch=main&event=push&job=terraform-validate)
+
+
+
 # 🚀 Serverless File Uploader
 
 A **serverless file uploader** built with:
@@ -20,5 +25,3 @@ A **serverless file uploader** built with:
 
 ## 📂 Project Structure
 
-
-![Build & Test](https://github.com/hpkhariprasad/serverless-file-uploader/.github/workflows/ci-cd.yml/badge.svg)

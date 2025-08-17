@@ -13,7 +13,7 @@ A **serverless file uploader** built with:
 - CI/CD pipeline with GitHub Actions
 
 ## 🛠️ Tech Stack
-- **.NET 7 Lambda** for backend
+- **.NET 8 Lambda** for backend
 - **Terraform** for IaC
 - **AWS S3** for storage
 - **GitHub Actions** for CI/CD

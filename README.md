@@ -55,10 +55,10 @@ serverless-file-uploader/
 ├── package.zip             # Lambda deployment package (generated during build)
 ├── README.md               # Project documentation
 └── LICENSE                 # Open-source license (Apache 2.0)
+```
 
 
-
-🛠️ Setup Instructions
+## 🛠️ Setup Instructions
 1. Prerequisites
 
 AWS account with IAM access

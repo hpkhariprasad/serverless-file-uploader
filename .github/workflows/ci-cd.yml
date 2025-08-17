@@ -1,0 +1,38 @@
+name: CI/CD for Lambda File Uploader
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore ./src/LambdaFileUploader
+
+      - name: Build
+        run: dotnet build ./src/LambdaFileUploader --configuration Release --no-restore
+
+      - name: Run Tests
+        run: dotnet test ./test/LambdaFileUploader.Tests --no-build --verbosity normal
+
+      - name: Package Lambda
+        run: dotnet lambda package --project-location ./src/LambdaFileUploader --output-package ./package.zip
+
+      - name: Deploy with Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+      - run: |
+          cd terraform
+          terraform init
+          terraform apply -auto-approve

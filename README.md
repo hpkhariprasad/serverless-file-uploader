@@ -55,3 +55,59 @@ serverless-file-uploader/
 ├── package.zip             # Lambda deployment package (generated during build)
 ├── README.md               # Project documentation
 └── LICENSE                 # Open-source license (Apache 2.0)
+
+
+🛠️ Setup Instructions
+1. Prerequisites
+
+AWS account with IAM access
+
+Terraform installed
+
+.NET 8 SDK installed
+
+AWS CLI configured
+
+2. Build & Package Lambda
+cd src/LambdaFileUploader
+dotnet publish -c Release -o ./publish
+
+# Create zip for deployment (one level above terraform folder)
+cd publish
+zip -r ../../../package.zip .
+
+3. Deploy Infrastructure with Terraform
+cd terraform
+terraform init
+terraform apply
+
+
+Terraform will:
+
+Create an S3 bucket (serverless-file-uploader-<account_id>)
+
+Deploy the Lambda function
+
+Generate a public Lambda Function URL
+
+▶️ Usage
+
+After deployment, Terraform outputs a Lambda Function URL.
+
+Send a POST request with a file stream to the Lambda URL. Example with curl:
+
+curl -X POST \
+     -H "Content-Type: application/octet-stream" \
+     --data-binary "@sample.txt" \
+     <LAMBDA_FUNCTION_URL>
+
+
+The file will be uploaded into the configured S3 bucket.
+
+📌 Real-World Extensions
+
+Generate pre-signed URLs for direct client uploads.
+
+Trigger post-processing (e.g., resize images, transcribe audio) using S3 Events + Lambda.
+
+Add authentication with AWS Cognito or API Gateway.

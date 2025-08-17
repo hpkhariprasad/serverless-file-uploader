@@ -1,15 +1,19 @@
-resource "aws_s3_bucket" "file_uploads" {
-  bucket = var.bucket_name
+# -----------------------
+# S3 Bucket for Uploads
+# -----------------------
+data "aws_caller_identity" "current" {}
+
+resource "aws_s3_bucket" "uploads" {
+  bucket = "serverless-file-uploader-${data.aws_caller_identity.current.account_id}"
 
   tags = {
-    Name        = "serverless-file-uploader"
-    Environment = "dev"
+    Name = "serverless-file-uploader"
   }
 }
 
-# Allow public block (recommended for uploads)
-resource "aws_s3_bucket_public_access_block" "file_uploads" {
-  bucket                  = aws_s3_bucket.file_uploads.id
+# Public Access Block
+resource "aws_s3_bucket_public_access_block" "uploads" {
+  bucket                  = aws_s3_bucket.uploads.id
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true

@@ -1,11 +1,11 @@
 variable "aws_region" {
-  description = "AWS region for resources"
+  description = "AWS region to deploy resources"
   type        = string
-  default     = "us-east-1"
+  default     = "ap-south-1" # Mumbai region
 }
 
-variable "bucket_name" {
-  description = "S3 bucket name for uploads"
+variable "lambda_function_name" {
+  description = "Lambda function name"
   type        = string
-  default     = "my-serverless-file-uploader-bucket"
+  default     = "file-uploader-func"
 }

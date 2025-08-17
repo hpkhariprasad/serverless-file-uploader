@@ -11,13 +11,17 @@ namespace LambdaFileUploader
     public class Function
     {
         protected readonly IAmazonS3 _s3Client;
-        private const string BucketName = "serverless-file-uploader-yourname";
+        private readonly string _bucketName;
 
         public Function() : this(new AmazonS3Client()) { }
 
         public Function(IAmazonS3 s3Client)
         {
             _s3Client = s3Client;
+            _bucketName = Environment.GetEnvironmentVariable("BUCKET_NAME");
+
+            if (string.IsNullOrEmpty(_bucketName))
+                throw new InvalidOperationException("Environment variable BUCKET_NAME is not set.");
         }
 
         public virtual async Task<string> FunctionHandler(Stream input, ILambdaContext context)
@@ -27,7 +31,7 @@ namespace LambdaFileUploader
             {
                 InputStream = input,
                 Key = fileName,
-                BucketName = BucketName
+                BucketName = _bucketName
             };
 
             var transferUtility = new TransferUtility(_s3Client);
